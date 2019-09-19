@@ -26,7 +26,7 @@ end
 # vagrant configurate
 Vagrant.configure(2) do |config|
   # select the box
-  config.vm.box = 'bento/ubuntu-16.04'
+  config.vm.box = 'ryceancurry/stbgcc-builder-u16.04_32'
 
   # should we ask about box updates?
   config.vm.box_check_update = options['box_check_update']
@@ -38,6 +38,9 @@ Vagrant.configure(2) do |config|
     vb.memory = options['memory']
     # machine name (for VirtualBox UI)
     vb.name = options['machine_name']
+    #vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+    #vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+    #vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
   end
 
   # machine name (for vagrant console)
@@ -62,7 +65,7 @@ Vagrant.configure(2) do |config|
   config.hostmanager.ignore_private_ip  = false
   config.hostmanager.include_offline    = true
   config.hostmanager.aliases            = domains.values
-
+  config.vm.boot_timeout = 600
   # provisioners
   config.vm.provision 'shell', path: './vagrant/provision/once-as-root.sh', args: [options['timezone']]
   config.vm.provision 'shell', path: './vagrant/provision/once-as-vagrant.sh', args: [options['github_token']], privileged: false

@@ -47,6 +47,7 @@ info "Install Oracle JDK"
 debconf-set-selections <<< "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"
 debconf-set-selections <<< "oracle-java8-installer shared/accepted-oracle-license-v1-1 seen true"
 apt-get install -y oracle-java8-installer
+apt-get install -y openjdk-8-jre
 
 info "Install ElasticSearch"
 apt-get install -y elasticsearch
